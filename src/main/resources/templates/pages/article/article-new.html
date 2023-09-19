@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymaleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<main layout:fragment="main-content">
+  <div class="container">
+    <h1>New Article</h1>
+    <form th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input th:field="*{title}" type="text" class="form-control" id="title">
+            <div class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input th:field="*{author}" type="text" class="form-control" id="author">
+            <div class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="thumbnailFile" class="form-label">Thumbnail</label>
+            <input class="form-control" type="file" id="thumbnailFile" name="thumbnailFile">
+            <img class="w-75" id="placeholder" th:src="@{/resources/img/placeholder.jpg}" alt="Your image"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</main>
+
+<th:block layout:fragment="subScript">
+  <script>
+    $(function() {
+      const thumbnailFile = document.getElementById('thumbnailFile')
+      const placeholder = document.getElementById('placeholder')
+      thumbnailFile.onchange = (evt) => {
+        const [file] = thumbnailFile.files
+        if (file) {
+          placeholder.src = URL.createObjectURL(file)
+        }
+      }
+    })
+  </script>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--card read only-->
+<a th:fragment="card-read-only(uuid,title,thumbnail,author)"
+   th:href="@{/article/{uuid}(uuid=${uuid})}" class="text-decoration-none">
+    <div class="card shadow-sm">
+        <img th:src="@{/resources/img/{thumbnail}(thumbnail=${thumbnail})}" alt="New Coffee" class="bd-placeholder-img card-img-top">
+        <div class="card-body">
+            <p th:text="${title}" class="card-text"></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <small th:text="${author}" class="text-muted"></small>
+            </div>
+        </div>
+    </div>
+</a>
+<!--card action-->
+<div th:fragment="card-action(uuid,title,thumbnail,author)" class="card shadow-sm">
+    <img th:src="@{/resources/img/{thumbnail}(thumbnail=${thumbnail})}" alt="New Coffee" class="bd-placeholder-img card-img-top">
+    <div class="card-body">
+        <p th:tesxt="${title}" class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <a href="#" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="#" type="button" class="btn btn-sm btn-outline-success">Edit</a>
+                <a href="#" type="button" class="btn btn-sm btn-outline-primary">Delete</a>
+            </div>
+            <small th:text="${author}" class="text-muted">9 mins</small>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymaleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}"
+    >
+<head>
+    <meta charset="UTF-8">
+    <title>Home-Pages</title>
+
+</head>
+<body>
+
+<main layout:fragment="main-content">
+    <h1>From sub layout</h1>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" th:each="article:${articles}"th:object="${article}">
+                    <div th:replace="~{fragments/card :: card-read-only(*{uuid},*{title},*{thumbnail},*{author})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
